@@ -30,6 +30,8 @@ jobs:
       with:
         dotnet-version: '3.1.x'
         source-url: https://nuget.pkg.github.com/afscrome/index.json
+      env:
+        NUGET_AUTH_TOKEN: FAKE - GIVEN ON PUSH COMMAND DIRECTLY
 
     - name: Build & Package
       run: dotnet pack
