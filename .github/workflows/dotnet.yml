@@ -1,0 +1,43 @@
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+
+  # This workflow contains a single job called "build"
+  build:
+
+    #Define msbuild parameters as variables so the same values are used
+    #throughout, to avoid unintentional rebuilds
+    env:
+      Version:  0.0.${{ github.run_number }}
+      VersionSuffix:  alpha+${{ github.github.sha }}
+      Configuration: Release# 
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x'
+        source-url: https://nuget.pkg.github.com/afscrome/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Build & Package
+      run: dotnet pack
+
+    - name: Run Tests
+      run: dotnet test
+
+    - name: Publish package
+      run: dotnet nuget push **/*.nupkg
