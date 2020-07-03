@@ -17,7 +17,7 @@ jobs:
     #Define msbuild parameters as variables so the same values are used
     #throughout, to avoid unintentional rebuilds
     env:
-      Version:  0.0.${{ github.run_number }}
+      VersionPrefix:  0.0.${{ github.run_number }}
       VersionSuffix:  alpha+${{ github.github.sha }}
       Configuration: Release
 
