@@ -30,8 +30,6 @@ jobs:
       with:
         dotnet-version: '3.1.x'
         source-url: https://nuget.pkg.github.com/afscrome/index.json
-      env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Build & Package
       run: dotnet pack
@@ -40,4 +38,4 @@ jobs:
       run: dotnet test
 
     - name: Publish package
-      run: dotnet nuget push **/*.nupkg
+      run: dotnet nuget push **/*.nupkg -k ${{secrets.GITHUB_TOKEN}}
