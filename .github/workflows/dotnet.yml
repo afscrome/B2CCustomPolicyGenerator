@@ -31,7 +31,7 @@ jobs:
         dotnet-version: '3.1.x'
         source-url: https://nuget.pkg.github.com/afscrome/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Build & Package
       run: dotnet pack
