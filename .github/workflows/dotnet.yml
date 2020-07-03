@@ -18,7 +18,7 @@ jobs:
     #throughout, to avoid unintentional rebuilds
     env:
       VersionPrefix:  0.0.${{ github.run_number }}
-      VersionSuffix:  alpha+${{ github.github.sha }}
+      VersionSuffix:  alpha+${{ github.sha }}
       Configuration: Release
 
     runs-on: ubuntu-latest
