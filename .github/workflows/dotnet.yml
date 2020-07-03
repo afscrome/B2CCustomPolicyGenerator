@@ -19,7 +19,7 @@ jobs:
     env:
       Version:  0.0.${{ github.run_number }}
       VersionSuffix:  alpha+${{ github.github.sha }}
-      Configuration: Release# 
+      Configuration: Release
 
     runs-on: ubuntu-latest
 
